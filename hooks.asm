@@ -39,7 +39,7 @@ HookVoiceDuration PROC
 	ret
 HookVoiceDuration ENDP
 
-HookAnotherOneOfTheseFucks PROC
+HookTimerSet PROC
 	push rcx
 	mov rcx, qword ptr [pModuleBase]
 	add rcx, 37433F8h
@@ -54,7 +54,22 @@ HookAnotherOneOfTheseFucks PROC
 	mov dword ptr [rsi+38Ch], 38d1b717h
 	Done:
 	ret
-HookAnotherOneOfTheseFucks ENDP
+HookTimerSet ENDP
+
+HookYetAnotherTimer PROC
+	mov qword ptr [rsp + 88h], rbp
+	mov qword ptr [rsp + 80h], rdi
+	push rcx
+	mov rcx, qword ptr [pModuleBase]
+	add rcx, 59D6FD0h
+	mov rcx, qword ptr [rcx]
+	cmp rcx, rsi
+	pop rcx
+	jnz Done
+	movss xmm0, dword ptr [minusOne]
+	Done:
+	ret
+HookYetAnotherTimer ENDP
 
 HookVoiceDurationALT PROC
 	push rcx

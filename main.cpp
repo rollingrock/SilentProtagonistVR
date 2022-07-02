@@ -16,7 +16,8 @@ extern "C" {
 	int minusOne32Int = 0;
 	void* __fastcall HookSilentGetter(void);
 	void* __fastcall HookVoiceDuration(void); 
-	void* __fastcall HookAnotherOneOfTheseFucks(void);
+	void* __fastcall HookTimerSet(void);
+	void* __fastcall HookYetAnotherTimer(void);
 }
 
 
@@ -63,8 +64,12 @@ bool F4SEPlugin_Load(const F4SEInterface* f4se) {
 	SafeWriteBuf(pModuleBase + 0xde2e83, (void*)"\xFF\xD0\x58\x90\x90\x90\x90\x90\x90", 0x9);
 
 	SafeWriteBuf(pModuleBase + 0xde45cb, (void*)"\x48\xB8", 0x2);
-	SafeWrite64(pModuleBase + 0xde45cd, (UInt64)HookAnotherOneOfTheseFucks);
+	SafeWrite64(pModuleBase + 0xde45cd, (UInt64)HookTimerSet);
 	SafeWriteBuf(pModuleBase + 0xde45d5, (void*)"\xFF\xD0\x90\x90\x90\x90", 0x6);
+
+	SafeWriteBuf(pModuleBase + 0xdfa8cd, (void*)"\x48\xB8", 0x2);
+	SafeWrite64(pModuleBase + 0xdfa8cf, (UInt64)HookYetAnotherTimer);
+	SafeWriteBuf(pModuleBase + 0xdfa8d7, (void*)"\xFF\xD0\x90", 0x3);
 
 	return true;
 }
